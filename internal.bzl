@@ -19,7 +19,6 @@
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
-
 load("//examples/lapack:patches.bzl", "LAPACK_PATCHES")
 
 # buildifier: disable=function-docstring
@@ -97,6 +96,15 @@ def internal_dependencies():
             "https://github.com/bazelbuild/rules_pkg/releases/download/0.9.1/rules_pkg-0.9.1.tar.gz",
         ],
     )
+
+# buildifier: disable=function-docstring
+def _internal_dependencies(ctx):
+    internal_dependencies()
+
+internal_deps = module_extension(
+    implementation = _internal_dependencies,
+    tag_classes = {},
+)
 
 _ALL_SRCS = """\
 filegroup(

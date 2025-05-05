@@ -21,7 +21,7 @@
 load("@bazel_skylib//lib:dicts.bzl", "dicts")
 load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("//sysroot:flags.bzl", "cflags", "cxxflags", "fflags", "ldflags", "includes")
+load("//sysroot:flags.bzl", "cflags", "cxxflags", "fflags", "includes", "ldflags")
 
 def _gcc_toolchain_impl(rctx):
     absolute_toolchain_root = str(rctx.path("."))
@@ -32,11 +32,8 @@ def _gcc_toolchain_impl(rctx):
 
     sysroot = ""
     if rctx.attr.sysroot:
-        sysroot_label = Label(rctx.attr.sysroot)
-        sysroot = "external/{workspace}/{package}".format(
-            workspace = sysroot_label.workspace_name,
-            package = sysroot_label.package,
-        )
+        sysroot_label = str(rctx.attr.sysroot)
+        sysroot = "external/" + Label(rctx.attr.sysroot).repo_name
 
     cxx_builtin_include_directories = rctx.attr.includes
     for include in cxx_builtin_include_directories:
@@ -81,7 +78,9 @@ def _gcc_toolchain_impl(rctx):
     ))
 
     binary_prefix = rctx.attr.binary_prefix
-    tool_paths = _render_tool_paths(rctx, rctx.name, rctx.attr.toolchain_files_repository_name, binary_prefix)
+
+    #TODO: no hardcoding of +gcc_toolchains
+    tool_paths = _render_tool_paths(rctx, rctx.name, "+gcc_toolchains+" + rctx.attr.toolchain_files_repository_name, binary_prefix)
     rctx.file("tool_paths.bzl", "tool_paths = {}".format(str(tool_paths)))
 
 def _format_flags(sysroot, toolchain_root, flags):
@@ -109,9 +108,9 @@ _FEATURE_ATTRS = {
     ),
     "extra_ldflags": attr.string_list(
         doc = "Extra flags for linking." +
-            " %sysroot% is rendered to the sysroot path." +
-            " %workspace% is rendered to the toolchain root path." +
-            " See https://github.com/bazelbuild/bazel/blob/a48e246e/src/main/java/com/google/devtools/build/lib/rules/cpp/CcToolchainProviderHelper.java#L234-L254.",
+              " %sysroot% is rendered to the sysroot path." +
+              " %workspace% is rendered to the toolchain root path." +
+              " See https://github.com/bazelbuild/bazel/blob/a48e246e/src/main/java/com/google/devtools/build/lib/rules/cpp/CcToolchainProviderHelper.java#L234-L254.",
         default = [],
     ),
     "gcc_toolchain_workspace_name": attr.string(
@@ -120,9 +119,9 @@ _FEATURE_ATTRS = {
     ),
     "includes": attr.string_list(
         doc = "Extra includes for compiling C and C++." +
-            " %sysroot% is rendered to the sysroot path." +
-            " %workspace% is rendered to the toolchain root path." +
-            " See https://github.com/bazelbuild/bazel/blob/a48e246e/src/main/java/com/google/devtools/build/lib/rules/cpp/CcToolchainProviderHelper.java#L234-L254.",
+              " %sysroot% is rendered to the sysroot path." +
+              " %workspace% is rendered to the toolchain root path." +
+              " See https://github.com/bazelbuild/bazel/blob/a48e246e/src/main/java/com/google/devtools/build/lib/rules/cpp/CcToolchainProviderHelper.java#L234-L254.",
         default = [],
     ),
     "sysroot": attr.string(
@@ -241,11 +240,11 @@ def _render_tool_paths(rctx, repository_name, toolchain_files_repository_name, b
 _DEFAULT_GCC_VERSION = "10.3.0"
 
 def gcc_register_toolchain(
-    name,
-    target_arch,
-    gcc_version = _DEFAULT_GCC_VERSION,
-    **kwargs
-):
+        name,
+        target_arch,
+        gcc_version = _DEFAULT_GCC_VERSION,
+        no_register = False,
+        **kwargs):
     """Declares a `gcc_toolchain` and calls `register_toolchain` for it.
 
     Args:
@@ -258,17 +257,18 @@ def gcc_register_toolchain(
     if not sysroot:
         sysroot_variant = kwargs.pop("sysroot_variant", target_arch)
         sysroot_repository_name = "sysroot_{sysroot_variant}".format(sysroot_variant = sysroot_variant)
-        sysroot = Label("@{sysroot_repository_name}//:sysroot".format(
-            sysroot_repository_name = sysroot_repository_name,
-        ))
         http_archive(
             name = sysroot_repository_name,
             build_file_content = _SYSROOT_BUILD_FILE_CONTENT,
             sha256 = _SYSROOTS[sysroot_variant].sha256,
             url = _SYSROOTS[sysroot_variant].url,
         )
+        sysroot = "@{sysroot_repository_name}//:sysroot".format(
+            sysroot_repository_name = sysroot_repository_name,
+        )
 
     binary_prefix = kwargs.pop("binary_prefix", "arm" if target_arch == ARCHS.armv7 else target_arch)
+
     # The following glob matches all the cases:
     #   - aarch64-buildroot-linux-gnu
     #   - arm-buildroot-linux-gnueabihf
@@ -307,11 +307,29 @@ def gcc_register_toolchain(
         sysroot = str(sysroot),
         target_arch = target_arch,
         toolchain_files_repository_name = toolchain_files_repository_name,
+        #toolchain_files_repository_path = toolchain_files_repository_path,
         **kwargs
     )
 
-    native.register_toolchains("@{}//:cc_toolchain".format(name))
-    native.register_toolchains("@{}//:fortran_toolchain".format(name))
+    if not no_register:
+        native.register_toolchains("@{}//:cc_toolchain".format(name))
+        native.register_toolchains("@{}//:fortran_toolchain".format(name))
+
+_toolchain = tag_class(attrs = {"target_arch": attr.string(), "name": attr.string(), "sysroot_variant": attr.string()})
+
+def _gcc_toolchains(ctx):
+    for mod in ctx.modules:
+        for toolchain in mod.tags.toolchain:
+            gcc_register_toolchain(
+                name = toolchain.name,
+                target_arch = toolchain.target_arch,
+                no_register = True,
+            )
+
+gcc_toolchains = module_extension(
+    implementation = _gcc_toolchains,
+    tag_classes = {"toolchain": _toolchain},
+)
 
 ARCHS = struct(
     aarch64 = "aarch64",
@@ -434,7 +452,6 @@ filegroup(
         "lib/gcc/{platform_directory_glob_pattern}/*/include/**",
         "lib/gcc/{platform_directory_glob_pattern}/*/include-fixed/**",
         "{platform_directory_glob_pattern}/include/**",
-        "{platform_directory_glob_pattern}/sysroot/usr/include/**",
         "{platform_directory_glob_pattern}/include/c++/*/**",
         "{platform_directory_glob_pattern}/include/c++/*/{platform_directory_glob_pattern}/**",
         "{platform_directory_glob_pattern}/include/c++/*/backward/**",
