@@ -29,7 +29,7 @@ gcc_toolchains.toolchain(
 )
 
 use_repo(gcc_toolchains, "gcc_toolchain_x86_64", "gcc_toolchain_armv7", "gcc_toolchain_aarch64")
-use_repo(gcc_toolchains, "sysroot_x86_64", "sysroot_armv7", "sysroot_aarch64")
+use_repo(gcc_toolchains, "sysroot_x86_64-X11", "sysroot_armv7", "sysroot_aarch64")
 
 register_toolchains(
     "@gcc_toolchain_x86_64//:cc_toolchain",

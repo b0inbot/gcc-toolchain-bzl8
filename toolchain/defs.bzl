@@ -251,11 +251,12 @@ def gcc_register_toolchain(
         name: The name passed to `gcc_toolchain`.
         target_arch: The target architecture of the toolchain.
         gcc_version: The version of GCC used by the toolchain.
+        no_register: Whether to register via native.register_toolchain.
         **kwargs: The extra arguments passed to `gcc_toolchain`. See `gcc_toolchain` for more info.
     """
     sysroot = kwargs.pop("sysroot", None)
     if not sysroot:
-        sysroot_variant = kwargs.pop("sysroot_variant", target_arch)
+        sysroot_variant = kwargs.pop("sysroot_variant", target_arch) or target_arch
         sysroot_repository_name = "sysroot_{sysroot_variant}".format(sysroot_variant = sysroot_variant)
         http_archive(
             name = sysroot_repository_name,
@@ -315,7 +316,7 @@ def gcc_register_toolchain(
         native.register_toolchains("@{}//:cc_toolchain".format(name))
         native.register_toolchains("@{}//:fortran_toolchain".format(name))
 
-_toolchain = tag_class(attrs = {"target_arch": attr.string(), "name": attr.string(), "sysroot_variant": attr.string()})
+_toolchain = tag_class(attrs = {"target_arch": attr.string(), "name": attr.string(), "sysroot_variant": attr.string(), "gcc_version": attr.string()})
 
 def _gcc_toolchains(ctx):
     for mod in ctx.modules:
@@ -323,6 +324,8 @@ def _gcc_toolchains(ctx):
             gcc_register_toolchain(
                 name = toolchain.name,
                 target_arch = toolchain.target_arch,
+                sysroot_variant = toolchain.sysroot_variant,
+                gcc_version = toolchain.gcc_version or _DEFAULT_GCC_VERSION,
                 no_register = True,
             )
 
