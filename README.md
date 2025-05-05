@@ -3,6 +3,22 @@
 This is a fully-hermetic Bazel GCC toolchain for Linux. It supports the glibc variants of
 https://toolchains.bootlin.com. You can find the documentation under [docs](./docs/).
 
+NOTE: This is a working fork for adding bazel 8 / bzlmod support.
+
+## What has been tested?
+
+- x86_64:
+  - OK - examples/hello_world_cpp
+  - OK - examples/hello_world_c
+  - OK - examples/hello_world_fortran
+  - FAIL - examples/lapack
+  - OK - examples/tabulate_fortran
+  - FAIL - examples/avl
+  - FAIL - examples/openssl
+  - FAIL - examples/protobuf
+- armv7 - UNTESTED
+- aarch64 - UNTESTED
+
 ## Why would someone want or need a hermetic toolchain?
 
 Reproducibility and portability.
@@ -27,9 +43,9 @@ compiled with this toolchain portable.
 
 ### Use cases
 
-* Your repository contains first-party C/C++/Fortran code; or
-* You need to run sanitizers (asan, lsan, tsan, ubsan) on your code; or
-* You need to cross-compile from Linux x86_64 to Linux armv7 or aarch64; or
-* You want to make your program portable to other Linux distros (our default sysroot ships with
-glibc 2.26); or
-* You want reproducibility.
+- Your repository contains first-party C/C++/Fortran code; or
+- You need to run sanitizers (asan, lsan, tsan, ubsan) on your code; or
+- You need to cross-compile from Linux x86_64 to Linux armv7 or aarch64; or
+- You want to make your program portable to other Linux distros (our default sysroot ships with
+  glibc 2.26); or
+- You want reproducibility.
