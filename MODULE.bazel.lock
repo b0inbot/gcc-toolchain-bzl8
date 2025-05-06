@@ -154,109 +154,15 @@
   },
   "selectedYankedVersions": {},
   "moduleExtensions": {
-    "//:internal.bzl%internal_deps": {
-      "general": {
-        "bzlTransitiveDigest": "iI9Ow4dkmSLvuGGX0aVF/1IeSecDoj0RMRql/Dc5s7o=",
-        "usagesDigest": "r6xr+GBflyrIdGzYZEFt2Udqx7hN78F18Nm6z2jADB4=",
-        "recordedFileInputs": {},
-        "recordedDirentsInputs": {},
-        "envVariables": {},
-        "generatedRepoSpecs": {
-          "io_bazel_stardoc": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "sha256": "dfbc364aaec143df5e6c52faf1f1166775a5b4408243f445f44b661cfdc3134f",
-              "urls": [
-                "https://mirror.bazel.build/github.com/bazelbuild/stardoc/releases/download/0.5.6/stardoc-0.5.6.tar.gz",
-                "https://github.com/bazelbuild/stardoc/releases/download/0.5.6/stardoc-0.5.6.tar.gz"
-              ]
-            }
-          },
-          "aspect_bazel_lib": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "sha256": "a7e356f8a5cb8bf1e9be38c2c617ad22f5a1606792e839fc040971bdfbecf971",
-              "strip_prefix": "bazel-lib-1.40.2",
-              "url": "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.40.2.tar.gz"
-            }
-          },
-          "rules_foreign_cc": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "sha256": "2a4d07cd64b0719b39a7c12218a3e507672b82a97b98c6a89d38565894cf7c51",
-              "strip_prefix": "rules_foreign_cc-0.9.0",
-              "url": "https://github.com/bazelbuild/rules_foreign_cc/archive/0.9.0.tar.gz"
-            }
-          },
-          "openssl": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "build_file_content": "filegroup(\n    name = \"srcs\",\n    srcs = glob(\n        include = [\"**\"],\n        exclude = [\"**/* *\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n",
-              "sha256": "40dceb51a4f6a5275bde0e6bf20ef4b91bfc32ed57c0552e2e8e15463372b17a",
-              "strip_prefix": "openssl-1.1.1n",
-              "url": "https://www.openssl.org/source/openssl-1.1.1n.tar.gz"
-            }
-          },
-          "lapack": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "build_file_content": "filegroup(\n    name = \"srcs\",\n    srcs = glob(\n        include = [\"**\"],\n        exclude = [\"**/* *\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n",
-              "patch_cmds": [
-                "cat > make.inc <<EOF\n####################################################################\n#  LAPACK make include file.                                       #\n####################################################################\n\nSHELL = $0\n\nCC ?=\n\nFC ?=\nFFLAGS ?=\nFFLAGS_DRV ?=\nFFLAGS_NOOPT ?=\n\nLDFLAGS ?=\n\nAR ?=\nARFLAGS = cr\nRANLIB = echo\n\nBLASLIB ?=\nCBLASLIB ?=\nLAPACKLIB ?=\nTMGLIB ?=\nLAPACKELIB ?=\n\nDOCSDIR ?=\n\nTIMER ?=\nEOF\n"
-              ],
-              "sha256": "eac9570f8e0ad6f30ce4b963f4f033f0f643e7c3912fc9ee6cd99120675ad48b",
-              "strip_prefix": "lapack-3.12.0",
-              "url": "https://github.com/Reference-LAPACK/lapack/archive/refs/tags/v3.12.0.tar.gz"
-            }
-          },
-          "avl": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "build_file": "@@//:examples/avl/avl.BUILD.bazel",
-              "sha256": "6d62e563578b79795a84958cfe4e221a4c9847fbeb4a821d45bc049934fc6a90",
-              "strip_prefix": "Avl",
-              "url": "https://web.mit.edu/drela/Public/web/avl/avl3.40b.tgz"
-            }
-          },
-          "com_google_protobuf": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "sha256": "930c2c3b5ecc6c9c12615cf5ad93f1cd6e12d0aba862b572e076259970ac3a53",
-              "strip_prefix": "protobuf-3.21.12",
-              "urls": [
-                "https://github.com/protocolbuffers/protobuf/archive/v3.21.12.tar.gz"
-              ]
-            }
-          },
-          "rules_pkg": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "sha256": "8f9ee2dc10c1ae514ee599a8b42ed99fa262b757058f65ad3c384289ff70c4b8",
-              "urls": [
-                "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.9.1/rules_pkg-0.9.1.tar.gz",
-                "https://github.com/bazelbuild/rules_pkg/releases/download/0.9.1/rules_pkg-0.9.1.tar.gz"
-              ]
-            }
-          }
-        },
-        "recordedRepoMappingEntries": [
-          [
-            "",
-            "bazel_tools",
-            "bazel_tools"
-          ]
-        ]
-      }
-    },
     "//toolchain:defs.bzl%gcc_toolchains": {
       "general": {
-        "bzlTransitiveDigest": "ahEtdJa8EXpJ16AgitJeKk4bzqbr37Tt4BgwOysSXwI=",
+        "bzlTransitiveDigest": "WIHKafbYfnMEEx4Wp9JWpUIJ/+ASJSE8BJZIAvCzJ8k=",
         "usagesDigest": "6Ha9YNFp6A+CIwkoRlXKZukORV5/yUk6R6leU2VayIQ=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
         "generatedRepoSpecs": {
-          "sysroot_aarch64": {
+          "gcc_toolchain_aarch64_sysroot": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
               "build_file_content": "filegroup(\n    name = \"sysroot\",\n    srcs = glob([\"**\"]),\n    visibility = [\"//visibility:public\"],\n)\n\ncc_library(\n    name = \"libstdcxx\",\n    srcs = glob(\n        include = [\"**/libstdc++.so*\"],\n        exclude = [\"**/*.py\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n\nsanitizers = [\"asan\", \"lsan\", \"tsan\", \"ubsan\"]\n\nexports_files(glob([\n    \"**/lib{}.so*\".format(san)\n    for san in sanitizers\n]))\n\n[filegroup(\n    name = \"lib{}_files\".format(san),\n    srcs = glob([\"**/lib{}.so*\".format(san)]),\n    visibility = [\"//visibility:public\"],\n) for san in sanitizers]\n\n[cc_library(\n    name = \"lib{}\".format(san),\n    srcs = glob([\"**/lib{}.so*\".format(san)]),\n    visibility = [\"//visibility:public\"],\n) for san in sanitizers]\n",
@@ -267,7 +173,7 @@
           "gcc_toolchain_aarch64_files": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
-              "build_file_content": "# Export all binary files:\nexports_files(\n    glob([\"bin/**\"]),\n    visibility = [\"//visibility:public\"],\n)\n\n# GCC\n\nsysroot_label = \"@sysroot_aarch64//:sysroot\"\n\nfilegroup(\n    name = \"compiler_files\",\n    srcs = [\n        \":as\",\n        \":gcc\",\n        \":gfortran\",\n        \":include\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"linker_files\",\n    srcs = [\n        \":ar\",\n        \":gcc\",\n        \":ld\",\n        \":ld.bfd\",\n        \":lib\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"include\",\n    srcs = glob([\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include/**\",\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include-fixed/**\",\n        \"*-buildroot-linux-gnu*/include/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/*-buildroot-linux-gnu*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/backward/**\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"lib\",\n    srcs = glob(\n        include = [\n            \"lib*/**\",\n            \"*-buildroot-linux-gnu*/lib*/**\",\n            \"**/*.so\",\n        ],\n        exclude = [\"lib*/**/*python*/**\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gcc\",\n    srcs = [\n        \"bin/aarch64-linux-cpp.br_real\",\n        \"bin/aarch64-linux-cpp\",\n        \"bin/aarch64-linux-g++.br_real\",\n        \"bin/aarch64-linux-g++\",\n        \"bin/aarch64-linux-gcc.br_real\",\n        \"bin/aarch64-linux-gcc\",\n    ] + glob([\n        \"**/cc1plus\",\n        \"**/cc1\",\n        # These shared objects are needed at runtime by GCC when linked dynamically to them.\n        \"lib/libgmp.so*\",\n        \"lib/libmpc.so*\",\n        \"lib/libmpfr.so*\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gfortran\",\n    srcs = [\n        \"bin/aarch64-linux-gfortran\",\n        \"bin/aarch64-linux-gfortran.br_real\",\n    ],\n    visibility = [\"//visibility:public\"],\n)\n\n# Binutils\n\nfilegroup(\n    name = \"ar_files\",\n    srcs = [\":ar\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"as_files\",\n    srcs = [\":as\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"dwp_files\",\n    srcs = [],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"objcopy_files\",\n    srcs = [\":objcopy\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"strip_files\",\n    srcs = [\":strip\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"coverage_files\",\n    srcs = [\":gcov\"],\n    visibility = [\"//visibility:public\"],\n)\n\n[\n    filegroup(\n        name = bin,\n        srcs = [\n            \"bin/aarch64-linux-\" + bin,\n        ] + glob([\n            \"bin/aarch64-buildroot-*-\" + bin,\n        ]),\n        visibility = [\"//visibility:public\"],\n    )\n    for bin in [\n        \"ar\",\n        \"as\",\n        \"gcov\",\n        \"ld\",\n        \"ld.bfd\",\n        \"nm\",\n        \"objcopy\",\n        \"objdump\",\n        \"ranlib\",\n        \"readelf\",\n        \"strip\",\n    ]\n]\n",
+              "build_file_content": "# Export all binary files:\nexports_files(\n    glob([\"bin/**\"]),\n    visibility = [\"//visibility:public\"],\n)\n\n# GCC\n\nsysroot_label = \"@gcc_toolchain_aarch64_sysroot//:sysroot\"\n\nfilegroup(\n    name = \"compiler_files\",\n    srcs = [\n        \":as\",\n        \":gcc\",\n        \":gfortran\",\n        \":include\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"linker_files\",\n    srcs = [\n        \":ar\",\n        \":gcc\",\n        \":ld\",\n        \":ld.bfd\",\n        \":lib\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"include\",\n    srcs = glob([\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include/**\",\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include-fixed/**\",\n        \"*-buildroot-linux-gnu*/include/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/*-buildroot-linux-gnu*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/backward/**\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"lib\",\n    srcs = glob(\n        include = [\n            \"lib*/**\",\n            \"*-buildroot-linux-gnu*/lib*/**\",\n            \"**/*.so\",\n        ],\n        exclude = [\"lib*/**/*python*/**\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gcc\",\n    srcs = [\n        \"bin/aarch64-linux-cpp.br_real\",\n        \"bin/aarch64-linux-cpp\",\n        \"bin/aarch64-linux-g++.br_real\",\n        \"bin/aarch64-linux-g++\",\n        \"bin/aarch64-linux-gcc.br_real\",\n        \"bin/aarch64-linux-gcc\",\n    ] + glob([\n        \"**/cc1plus\",\n        \"**/cc1\",\n        # These shared objects are needed at runtime by GCC when linked dynamically to them.\n        \"lib/libgmp.so*\",\n        \"lib/libmpc.so*\",\n        \"lib/libmpfr.so*\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gfortran\",\n    srcs = [\n        \"bin/aarch64-linux-gfortran\",\n        \"bin/aarch64-linux-gfortran.br_real\",\n    ],\n    visibility = [\"//visibility:public\"],\n)\n\n# Binutils\n\nfilegroup(\n    name = \"ar_files\",\n    srcs = [\":ar\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"as_files\",\n    srcs = [\":as\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"dwp_files\",\n    srcs = [],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"objcopy_files\",\n    srcs = [\":objcopy\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"strip_files\",\n    srcs = [\":strip\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"coverage_files\",\n    srcs = [\":gcov\"],\n    visibility = [\"//visibility:public\"],\n)\n\n[\n    filegroup(\n        name = bin,\n        srcs = [\n            \"bin/aarch64-linux-\" + bin,\n        ] + glob([\n            \"bin/aarch64-buildroot-*-\" + bin,\n        ]),\n        visibility = [\"//visibility:public\"],\n    )\n    for bin in [\n        \"ar\",\n        \"as\",\n        \"gcov\",\n        \"ld\",\n        \"ld.bfd\",\n        \"nm\",\n        \"objcopy\",\n        \"objdump\",\n        \"ranlib\",\n        \"readelf\",\n        \"strip\",\n    ]\n]\n",
               "patch_cmds": [
                 "find . -type d -name 'sysroot' -exec rm -rf {} +",
                 "find . -type f -name 'libgfortran*' -exec rm \"{}\" \\;",
@@ -314,12 +220,12 @@
                 "%sysroot%/lib/gcc/aarch64-linux/10.3.0/include",
                 "%sysroot%/usr/include"
               ],
-              "sysroot": "@sysroot_aarch64//:sysroot",
+              "sysroot": "gcc_toolchain_aarch64_sysroot",
               "target_arch": "aarch64",
               "toolchain_files_repository_name": "gcc_toolchain_aarch64_files"
             }
           },
-          "sysroot_armv7": {
+          "gcc_toolchain_armv7_sysroot": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
               "build_file_content": "filegroup(\n    name = \"sysroot\",\n    srcs = glob([\"**\"]),\n    visibility = [\"//visibility:public\"],\n)\n\ncc_library(\n    name = \"libstdcxx\",\n    srcs = glob(\n        include = [\"**/libstdc++.so*\"],\n        exclude = [\"**/*.py\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n\nsanitizers = [\"asan\", \"lsan\", \"tsan\", \"ubsan\"]\n\nexports_files(glob([\n    \"**/lib{}.so*\".format(san)\n    for san in sanitizers\n]))\n\n[filegroup(\n    name = \"lib{}_files\".format(san),\n    srcs = glob([\"**/lib{}.so*\".format(san)]),\n    visibility = [\"//visibility:public\"],\n) for san in sanitizers]\n\n[cc_library(\n    name = \"lib{}\".format(san),\n    srcs = glob([\"**/lib{}.so*\".format(san)]),\n    visibility = [\"//visibility:public\"],\n) for san in sanitizers]\n",
@@ -330,7 +236,7 @@
           "gcc_toolchain_armv7_files": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
-              "build_file_content": "# Export all binary files:\nexports_files(\n    glob([\"bin/**\"]),\n    visibility = [\"//visibility:public\"],\n)\n\n# GCC\n\nsysroot_label = \"@sysroot_armv7//:sysroot\"\n\nfilegroup(\n    name = \"compiler_files\",\n    srcs = [\n        \":as\",\n        \":gcc\",\n        \":gfortran\",\n        \":include\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"linker_files\",\n    srcs = [\n        \":ar\",\n        \":gcc\",\n        \":ld\",\n        \":ld.bfd\",\n        \":lib\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"include\",\n    srcs = glob([\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include/**\",\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include-fixed/**\",\n        \"*-buildroot-linux-gnu*/include/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/*-buildroot-linux-gnu*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/backward/**\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"lib\",\n    srcs = glob(\n        include = [\n            \"lib*/**\",\n            \"*-buildroot-linux-gnu*/lib*/**\",\n            \"**/*.so\",\n        ],\n        exclude = [\"lib*/**/*python*/**\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gcc\",\n    srcs = [\n        \"bin/arm-linux-cpp.br_real\",\n        \"bin/arm-linux-cpp\",\n        \"bin/arm-linux-g++.br_real\",\n        \"bin/arm-linux-g++\",\n        \"bin/arm-linux-gcc.br_real\",\n        \"bin/arm-linux-gcc\",\n    ] + glob([\n        \"**/cc1plus\",\n        \"**/cc1\",\n        # These shared objects are needed at runtime by GCC when linked dynamically to them.\n        \"lib/libgmp.so*\",\n        \"lib/libmpc.so*\",\n        \"lib/libmpfr.so*\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gfortran\",\n    srcs = [\n        \"bin/arm-linux-gfortran\",\n        \"bin/arm-linux-gfortran.br_real\",\n    ],\n    visibility = [\"//visibility:public\"],\n)\n\n# Binutils\n\nfilegroup(\n    name = \"ar_files\",\n    srcs = [\":ar\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"as_files\",\n    srcs = [\":as\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"dwp_files\",\n    srcs = [],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"objcopy_files\",\n    srcs = [\":objcopy\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"strip_files\",\n    srcs = [\":strip\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"coverage_files\",\n    srcs = [\":gcov\"],\n    visibility = [\"//visibility:public\"],\n)\n\n[\n    filegroup(\n        name = bin,\n        srcs = [\n            \"bin/arm-linux-\" + bin,\n        ] + glob([\n            \"bin/arm-buildroot-*-\" + bin,\n        ]),\n        visibility = [\"//visibility:public\"],\n    )\n    for bin in [\n        \"ar\",\n        \"as\",\n        \"gcov\",\n        \"ld\",\n        \"ld.bfd\",\n        \"nm\",\n        \"objcopy\",\n        \"objdump\",\n        \"ranlib\",\n        \"readelf\",\n        \"strip\",\n    ]\n]\n",
+              "build_file_content": "# Export all binary files:\nexports_files(\n    glob([\"bin/**\"]),\n    visibility = [\"//visibility:public\"],\n)\n\n# GCC\n\nsysroot_label = \"@gcc_toolchain_armv7_sysroot//:sysroot\"\n\nfilegroup(\n    name = \"compiler_files\",\n    srcs = [\n        \":as\",\n        \":gcc\",\n        \":gfortran\",\n        \":include\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"linker_files\",\n    srcs = [\n        \":ar\",\n        \":gcc\",\n        \":ld\",\n        \":ld.bfd\",\n        \":lib\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"include\",\n    srcs = glob([\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include/**\",\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include-fixed/**\",\n        \"*-buildroot-linux-gnu*/include/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/*-buildroot-linux-gnu*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/backward/**\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"lib\",\n    srcs = glob(\n        include = [\n            \"lib*/**\",\n            \"*-buildroot-linux-gnu*/lib*/**\",\n            \"**/*.so\",\n        ],\n        exclude = [\"lib*/**/*python*/**\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gcc\",\n    srcs = [\n        \"bin/arm-linux-cpp.br_real\",\n        \"bin/arm-linux-cpp\",\n        \"bin/arm-linux-g++.br_real\",\n        \"bin/arm-linux-g++\",\n        \"bin/arm-linux-gcc.br_real\",\n        \"bin/arm-linux-gcc\",\n    ] + glob([\n        \"**/cc1plus\",\n        \"**/cc1\",\n        # These shared objects are needed at runtime by GCC when linked dynamically to them.\n        \"lib/libgmp.so*\",\n        \"lib/libmpc.so*\",\n        \"lib/libmpfr.so*\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gfortran\",\n    srcs = [\n        \"bin/arm-linux-gfortran\",\n        \"bin/arm-linux-gfortran.br_real\",\n    ],\n    visibility = [\"//visibility:public\"],\n)\n\n# Binutils\n\nfilegroup(\n    name = \"ar_files\",\n    srcs = [\":ar\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"as_files\",\n    srcs = [\":as\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"dwp_files\",\n    srcs = [],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"objcopy_files\",\n    srcs = [\":objcopy\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"strip_files\",\n    srcs = [\":strip\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"coverage_files\",\n    srcs = [\":gcov\"],\n    visibility = [\"//visibility:public\"],\n)\n\n[\n    filegroup(\n        name = bin,\n        srcs = [\n            \"bin/arm-linux-\" + bin,\n        ] + glob([\n            \"bin/arm-buildroot-*-\" + bin,\n        ]),\n        visibility = [\"//visibility:public\"],\n    )\n    for bin in [\n        \"ar\",\n        \"as\",\n        \"gcov\",\n        \"ld\",\n        \"ld.bfd\",\n        \"nm\",\n        \"objcopy\",\n        \"objdump\",\n        \"ranlib\",\n        \"readelf\",\n        \"strip\",\n    ]\n]\n",
               "patch_cmds": [
                 "find . -type d -name 'sysroot' -exec rm -rf {} +",
                 "find . -type f -name 'libgfortran*' -exec rm \"{}\" \\;",
@@ -377,12 +283,12 @@
                 "%sysroot%/lib/gcc/arm-linux-gnueabihf/10.3.0/include",
                 "%sysroot%/usr/include"
               ],
-              "sysroot": "@sysroot_armv7//:sysroot",
+              "sysroot": "gcc_toolchain_armv7_sysroot",
               "target_arch": "armv7",
               "toolchain_files_repository_name": "gcc_toolchain_armv7_files"
             }
           },
-          "sysroot_x86_64-X11": {
+          "gcc_toolchain_x86_64_sysroot": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
               "build_file_content": "filegroup(\n    name = \"sysroot\",\n    srcs = glob([\"**\"]),\n    visibility = [\"//visibility:public\"],\n)\n\ncc_library(\n    name = \"libstdcxx\",\n    srcs = glob(\n        include = [\"**/libstdc++.so*\"],\n        exclude = [\"**/*.py\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n\nsanitizers = [\"asan\", \"lsan\", \"tsan\", \"ubsan\"]\n\nexports_files(glob([\n    \"**/lib{}.so*\".format(san)\n    for san in sanitizers\n]))\n\n[filegroup(\n    name = \"lib{}_files\".format(san),\n    srcs = glob([\"**/lib{}.so*\".format(san)]),\n    visibility = [\"//visibility:public\"],\n) for san in sanitizers]\n\n[cc_library(\n    name = \"lib{}\".format(san),\n    srcs = glob([\"**/lib{}.so*\".format(san)]),\n    visibility = [\"//visibility:public\"],\n) for san in sanitizers]\n",
@@ -393,7 +299,7 @@
           "gcc_toolchain_x86_64_files": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
-              "build_file_content": "# Export all binary files:\nexports_files(\n    glob([\"bin/**\"]),\n    visibility = [\"//visibility:public\"],\n)\n\n# GCC\n\nsysroot_label = \"@sysroot_x86_64-X11//:sysroot\"\n\nfilegroup(\n    name = \"compiler_files\",\n    srcs = [\n        \":as\",\n        \":gcc\",\n        \":gfortran\",\n        \":include\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"linker_files\",\n    srcs = [\n        \":ar\",\n        \":gcc\",\n        \":ld\",\n        \":ld.bfd\",\n        \":lib\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"include\",\n    srcs = glob([\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include/**\",\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include-fixed/**\",\n        \"*-buildroot-linux-gnu*/include/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/*-buildroot-linux-gnu*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/backward/**\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"lib\",\n    srcs = glob(\n        include = [\n            \"lib*/**\",\n            \"*-buildroot-linux-gnu*/lib*/**\",\n            \"**/*.so\",\n        ],\n        exclude = [\"lib*/**/*python*/**\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gcc\",\n    srcs = [\n        \"bin/x86_64-linux-cpp.br_real\",\n        \"bin/x86_64-linux-cpp\",\n        \"bin/x86_64-linux-g++.br_real\",\n        \"bin/x86_64-linux-g++\",\n        \"bin/x86_64-linux-gcc.br_real\",\n        \"bin/x86_64-linux-gcc\",\n    ] + glob([\n        \"**/cc1plus\",\n        \"**/cc1\",\n        # These shared objects are needed at runtime by GCC when linked dynamically to them.\n        \"lib/libgmp.so*\",\n        \"lib/libmpc.so*\",\n        \"lib/libmpfr.so*\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gfortran\",\n    srcs = [\n        \"bin/x86_64-linux-gfortran\",\n        \"bin/x86_64-linux-gfortran.br_real\",\n    ],\n    visibility = [\"//visibility:public\"],\n)\n\n# Binutils\n\nfilegroup(\n    name = \"ar_files\",\n    srcs = [\":ar\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"as_files\",\n    srcs = [\":as\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"dwp_files\",\n    srcs = [],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"objcopy_files\",\n    srcs = [\":objcopy\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"strip_files\",\n    srcs = [\":strip\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"coverage_files\",\n    srcs = [\":gcov\"],\n    visibility = [\"//visibility:public\"],\n)\n\n[\n    filegroup(\n        name = bin,\n        srcs = [\n            \"bin/x86_64-linux-\" + bin,\n        ] + glob([\n            \"bin/x86_64-buildroot-*-\" + bin,\n        ]),\n        visibility = [\"//visibility:public\"],\n    )\n    for bin in [\n        \"ar\",\n        \"as\",\n        \"gcov\",\n        \"ld\",\n        \"ld.bfd\",\n        \"nm\",\n        \"objcopy\",\n        \"objdump\",\n        \"ranlib\",\n        \"readelf\",\n        \"strip\",\n    ]\n]\n",
+              "build_file_content": "# Export all binary files:\nexports_files(\n    glob([\"bin/**\"]),\n    visibility = [\"//visibility:public\"],\n)\n\n# GCC\n\nsysroot_label = \"@gcc_toolchain_x86_64_sysroot//:sysroot\"\n\nfilegroup(\n    name = \"compiler_files\",\n    srcs = [\n        \":as\",\n        \":gcc\",\n        \":gfortran\",\n        \":include\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"linker_files\",\n    srcs = [\n        \":ar\",\n        \":gcc\",\n        \":ld\",\n        \":ld.bfd\",\n        \":lib\",\n    ] + ([sysroot_label] if sysroot_label else []),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"include\",\n    srcs = glob([\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include/**\",\n        \"lib/gcc/*-buildroot-linux-gnu*/*/include-fixed/**\",\n        \"*-buildroot-linux-gnu*/include/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/*-buildroot-linux-gnu*/**\",\n        \"*-buildroot-linux-gnu*/include/c++/*/backward/**\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"lib\",\n    srcs = glob(\n        include = [\n            \"lib*/**\",\n            \"*-buildroot-linux-gnu*/lib*/**\",\n            \"**/*.so\",\n        ],\n        exclude = [\"lib*/**/*python*/**\"],\n    ),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gcc\",\n    srcs = [\n        \"bin/x86_64-linux-cpp.br_real\",\n        \"bin/x86_64-linux-cpp\",\n        \"bin/x86_64-linux-g++.br_real\",\n        \"bin/x86_64-linux-g++\",\n        \"bin/x86_64-linux-gcc.br_real\",\n        \"bin/x86_64-linux-gcc\",\n    ] + glob([\n        \"**/cc1plus\",\n        \"**/cc1\",\n        # These shared objects are needed at runtime by GCC when linked dynamically to them.\n        \"lib/libgmp.so*\",\n        \"lib/libmpc.so*\",\n        \"lib/libmpfr.so*\",\n    ]),\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"gfortran\",\n    srcs = [\n        \"bin/x86_64-linux-gfortran\",\n        \"bin/x86_64-linux-gfortran.br_real\",\n    ],\n    visibility = [\"//visibility:public\"],\n)\n\n# Binutils\n\nfilegroup(\n    name = \"ar_files\",\n    srcs = [\":ar\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"as_files\",\n    srcs = [\":as\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"dwp_files\",\n    srcs = [],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"objcopy_files\",\n    srcs = [\":objcopy\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"strip_files\",\n    srcs = [\":strip\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"coverage_files\",\n    srcs = [\":gcov\"],\n    visibility = [\"//visibility:public\"],\n)\n\n[\n    filegroup(\n        name = bin,\n        srcs = [\n            \"bin/x86_64-linux-\" + bin,\n        ] + glob([\n            \"bin/x86_64-buildroot-*-\" + bin,\n        ]),\n        visibility = [\"//visibility:public\"],\n    )\n    for bin in [\n        \"ar\",\n        \"as\",\n        \"gcov\",\n        \"ld\",\n        \"ld.bfd\",\n        \"nm\",\n        \"objcopy\",\n        \"objdump\",\n        \"ranlib\",\n        \"readelf\",\n        \"strip\",\n    ]\n]\n",
               "patch_cmds": [
                 "find . -type d -name 'sysroot' -exec rm -rf {} +",
                 "find . -type f -name 'libgfortran*' -exec rm \"{}\" \\;",
@@ -440,7 +346,7 @@
                 "%sysroot%/lib/gcc/x86_64-linux/10.3.0/include",
                 "%sysroot%/usr/include"
               ],
-              "sysroot": "@sysroot_x86_64-X11//:sysroot",
+              "sysroot": "gcc_toolchain_x86_64_sysroot",
               "target_arch": "x86_64",
               "toolchain_files_repository_name": "gcc_toolchain_x86_64_files"
             }

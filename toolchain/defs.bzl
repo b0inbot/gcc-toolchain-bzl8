@@ -32,8 +32,7 @@ def _gcc_toolchain_impl(rctx):
 
     sysroot = ""
     if rctx.attr.sysroot:
-        sysroot_label = str(rctx.attr.sysroot)
-        sysroot = "external/" + Label(rctx.attr.sysroot).repo_name
+        sysroot = toolchain_root + "_sysroot"
 
     cxx_builtin_include_directories = rctx.attr.includes
     for include in cxx_builtin_include_directories:
@@ -79,8 +78,7 @@ def _gcc_toolchain_impl(rctx):
 
     binary_prefix = rctx.attr.binary_prefix
 
-    #TODO: no hardcoding of +gcc_toolchains
-    tool_paths = _render_tool_paths(rctx, rctx.name, "+gcc_toolchains+" + rctx.attr.toolchain_files_repository_name, binary_prefix)
+    tool_paths = _render_tool_paths(rctx, rctx.name, toolchain_root + "_files", binary_prefix)
     rctx.file("tool_paths.bzl", "tool_paths = {}".format(str(tool_paths)))
 
 def _format_flags(sysroot, toolchain_root, flags):
@@ -167,51 +165,51 @@ gcc_toolchain = repository_rule(
 
 def _render_tool_paths(rctx, repository_name, toolchain_files_repository_name, binary_prefix):
     relative_tool_paths = {
-        "ar": "external/{repository_name}/bin/{binary_prefix}-linux-ar".format(
+        "ar": "{repository_name}/bin/{binary_prefix}-linux-ar".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "as": "external/{repository_name}/bin/{binary_prefix}-linux-as".format(
+        "as": "{repository_name}/bin/{binary_prefix}-linux-as".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "cpp": "external/{repository_name}/bin/{binary_prefix}-linux-cpp".format(
+        "cpp": "{repository_name}/bin/{binary_prefix}-linux-cpp".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "g++": "external/{repository_name}/bin/{binary_prefix}-linux-g++".format(
+        "g++": "{repository_name}/bin/{binary_prefix}-linux-g++".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "gcc": "external/{repository_name}/bin/{binary_prefix}-linux-gcc".format(
+        "gcc": "{repository_name}/bin/{binary_prefix}-linux-gcc".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "gcov": "external/{repository_name}/bin/{binary_prefix}-linux-gcov".format(
+        "gcov": "{repository_name}/bin/{binary_prefix}-linux-gcov".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "gfortran": "external/{repository_name}/bin/{binary_prefix}-linux-gfortran".format(
+        "gfortran": "{repository_name}/bin/{binary_prefix}-linux-gfortran".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "ld": "external/{repository_name}/bin/{binary_prefix}-linux-ld".format(
+        "ld": "{repository_name}/bin/{binary_prefix}-linux-ld".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "nm": "external/{repository_name}/bin/{binary_prefix}-linux-nm".format(
+        "nm": "{repository_name}/bin/{binary_prefix}-linux-nm".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "objcopy": "external/{repository_name}/bin/{binary_prefix}-linux-objcopy".format(
+        "objcopy": "{repository_name}/bin/{binary_prefix}-linux-objcopy".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "objdump": "external/{repository_name}/bin/{binary_prefix}-linux-objdump".format(
+        "objdump": "{repository_name}/bin/{binary_prefix}-linux-objdump".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
-        "strip": "external/{repository_name}/bin/{binary_prefix}-linux-strip".format(
+        "strip": "{repository_name}/bin/{binary_prefix}-linux-strip".format(
             repository_name = toolchain_files_repository_name,
             binary_prefix = binary_prefix,
         ),
@@ -257,16 +255,14 @@ def gcc_register_toolchain(
     sysroot = kwargs.pop("sysroot", None)
     if not sysroot:
         sysroot_variant = kwargs.pop("sysroot_variant", target_arch) or target_arch
-        sysroot_repository_name = "sysroot_{sysroot_variant}".format(sysroot_variant = sysroot_variant)
+        sysroot_repository_name = "{name}_sysroot".format(name = name, sysroot_variant = sysroot_variant)
         http_archive(
             name = sysroot_repository_name,
             build_file_content = _SYSROOT_BUILD_FILE_CONTENT,
             sha256 = _SYSROOTS[sysroot_variant].sha256,
             url = _SYSROOTS[sysroot_variant].url,
         )
-        sysroot = "@{sysroot_repository_name}//:sysroot".format(
-            sysroot_repository_name = sysroot_repository_name,
-        )
+        sysroot = sysroot_repository_name
 
     binary_prefix = kwargs.pop("binary_prefix", "arm" if target_arch == ARCHS.armv7 else target_arch)
 
@@ -282,7 +278,7 @@ def gcc_register_toolchain(
         build_file_content = _TOOLCHAIN_FILES_BUILD_FILE_CONTENT.format(
             binary_prefix = binary_prefix,
             platform_directory_glob_pattern = platform_directory_glob_pattern,
-            sysroot_label = str(sysroot),
+            sysroot_label = "@{sysroot}//:sysroot".format(sysroot = sysroot),
         ),
         patch_cmds = [
             # The sysroot shipped with the bootlin toolchain should never be used.
@@ -328,6 +324,8 @@ def _gcc_toolchains(ctx):
                 gcc_version = toolchain.gcc_version or _DEFAULT_GCC_VERSION,
                 no_register = True,
             )
+
+        #return modules.use_all_repos(ctx)
 
 gcc_toolchains = module_extension(
     implementation = _gcc_toolchains,
